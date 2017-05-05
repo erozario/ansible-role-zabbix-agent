@@ -1,0 +1,21 @@
+---
+# tasks file for ansible-role-zabbix-agent
+
+- name: upgrade all packages
+  package:
+    name: '*'
+    state: latest
+
+- name: "Install the correct repository"
+  include: "amazon.yml"
+  when: ansible_distribution == "Amazon"
+
+- name: "Configure zabbix-agentd"
+  template: src=zabbix_agentd.conf.j2
+            dest=/etc/zabbix/zabbix_agentd.conf
+            owner=zabbix
+            group=zabbix
+            mode=0644
+
+- name: "Restart zabbix-agentd"
+  service: name=zabbix-agent state=restarted enabled=yes

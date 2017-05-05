@@ -1,0 +1,5 @@
+---
+# defaults file for ansible-role-zabbix-agent
+
+zabbix_url: zabbix.example.com
+zabbix_version: 3.0

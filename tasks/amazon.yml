@@ -1,0 +1,12 @@
+---
+# Tasks specific for AWS systems
+
+- name: "Amazon | Install basic repo file"
+  template: src=amz.repo.j2
+            dest=/etc/yum.repos.d/zabbix.repo
+            owner=root
+            group=root
+            mode=0644
+
+- name: "Amazon | Installing zabbix-agent"
+  package: name=zabbix-agent state=present
